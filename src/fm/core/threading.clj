@@ -18,15 +18,12 @@
       (.start))))
 
 (defmacro do-async
-  "Wraps the given forms in a job function that will be executed in a new
-  thread. Supported options are: :thread-name name prefix (defaults to
-  \"do-async\", a dash and the created thread's id will be appended),
-  :priority thread priority (defaults to Thread/NORM_PRIORITY)."
-  [& forms-and-options]
-  (let [[forms options] (split-with-tags 
-                          forms-and-options
-                          :thread-name :priority)]
-    `(call-async (fn [] ~@forms) ~@options)))
+  "Wraps the given collection of forms in a job function that will be executed
+  in a new thread. Supported options are: :thread-name name prefix (defaults to
+  \"do-async\", a dash and the created thread's id will be appended), :priority
+  thread priority (defaults to Thread/NORM_PRIORITY)."
+  [forms & {:keys [thread-name priority]}]
+  `(call-async (fn [] ~@forms) :thread-name ~thread-name :priority ~priority))
 
 (defmacro with-lock
   "Executes the body forms after acquiring the lock. Ensures that the lock
