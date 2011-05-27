@@ -2,21 +2,6 @@
   (:use (clojure.contrib def))
   (:use (fm.core opts exception)))
 
-(defn send-and-wait [agent job & args]
-  (let [promise (promise)
-        job-wrapper (fn [state & args]
-                      (try
-                        (let [result (apply job state args)]
-                          (deliver promise result)
-                          result)
-                        (catch Throwable t
-                          (deliver promise t)
-                          (throw t))))]
-    (apply send-off agent job-wrapper args)
-    (if (instance? Throwable @promise)
-      (throw @promise)
-      @promise)))
-
 (defn- element-processor [producers parallel?]
   (let [map-fn (if parallel? pmap map)]
     (fn [element]
@@ -44,4 +29,41 @@
         #(results-for-nth-producer % step skip-pred results)
         (range step)))))
 
-(defmacro capture-attributes [object & accessors])
+(defn- collect-children [branch? children nodes]
+  (if (seq nodes)
+    (lazy-cat nodes (collect-children
+                      branch?
+                      children
+                      (mapcat #(if (branch? %) (children %)) nodes)))))
+
+(defn breadth-first-seq [branch? children root]
+  (collect-children branch? children [root]))
+
+(def tree [1
+           [2
+            [6
+             [11
+              [13
+               [15]
+               [16]
+               [17]]
+              [14]]
+             [12]]
+            [7]]
+           [3
+            [8]
+            [9]]
+           [4
+            [10]]
+           [5]])
+
+(defn branch? [node] (next node))
+
+(defn children [node] (rest node))
+
+(defn breadth-first-file-seq [root]
+  (let [branch? (fn [file]
+                  (and file (.isDirectory file)))
+        children (fn [file]
+                   (and file (.listFiles file)))]
+    (breadth-first-seq branch? children root)))
