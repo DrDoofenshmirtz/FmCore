@@ -1,6 +1,6 @@
 (ns fm.scratch
   (:use (clojure.contrib def))
-  (:use (fm.core opts exception)))
+  (:use (fm.core exception)))
 
 (defn- element-processor [producers parallel?]
   (let [map-fn (if parallel? pmap map)]
@@ -39,6 +39,20 @@
 (defn breadth-first-seq [branch? children root]
   (collect-children branch? children [root]))
 
+(defn- deep-collect-children [branch? children nodes]
+  (if (seq nodes)
+    (concat
+      (deep-collect-children
+        branch?
+        children
+        (if (branch? (first nodes))
+          (children (first nodes))))
+      (deep-collect-children branch? children (rest nodes))
+      [(first nodes)])))
+
+(defn depth-first-seq [branch? children root]
+  (deep-collect-children branch? children [root]))
+
 (def tree [1
            [2
             [6
@@ -60,6 +74,8 @@
 (defn branch? [node] (next node))
 
 (defn children [node] (rest node))
+
+(println "NODES:" (map first (depth-first-seq branch? children tree)))
 
 (defn breadth-first-file-seq [root]
   (let [branch? (fn [file]
