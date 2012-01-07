@@ -1,0 +1,8 @@
+/lib/**
+/out/**
+/classes/**
+*.class
+*.iml
+*.ipr
+*.iws
+
