@@ -17,7 +17,7 @@
 (defn- option-reader [default-value flag-option?]
   ((if flag-option? flag-reader value-reader) default-value))
 
-(defn- reader-map [option-specs make-reader-value]
+(defn- reader-map [option-specs make-reader]
   (reduce
     (fn [reader-map option-spec]
       (let [[option-name default-value] option-spec
@@ -25,8 +25,8 @@
             flag-option? (.endsWith option-name "?")
             option-name (if flag-option? (chop option-name) option-name)
             option-name (keyword option-name)
-            reader-value (make-reader-value default-value flag-option?)]
-        (assoc reader-map option-name reader-value)))
+            option-reader (make-reader default-value flag-option?)]
+        (assoc reader-map option-name option-reader)))
     {}
     option-specs))
 
