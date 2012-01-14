@@ -4,18 +4,18 @@
   fm.core.args
   (:use [clojure.contrib.str-utils :only (chop)]))
 
-(defn flag-reader [option-name default-value]
+(defn flag-reader [default-value]
   (fn
     ([] default-value)
-    ([[_ & args]] [true args])))
+    ([[_ & args-tail]] [true args-tail])))
 
-(defn value-reader [option-name default-value]
+(defn value-reader [default-value]
   (fn
     ([] default-value)
-    ([[_ value & args]] [value args])))
+    ([[_ value & args-tail]] [value args-tail])))
 
-(defn- option-reader [option-name default-value flag-option?]
-  ((if flag-option? flag-reader value-reader) option-name default-value))
+(defn- option-reader [default-value flag-option?]
+  ((if flag-option? flag-reader value-reader) default-value))
 
 (defn- reader-map [option-specs make-option-reader]
   (reduce
@@ -25,7 +25,7 @@
             flag-option? (.endsWith option-name "?")
             option-name (if flag-option? (chop option-name) option-name)
             option-name (keyword option-name)
-            option-reader (make-option-reader option-name default-value flag-option?)]
+            option-reader (make-option-reader default-value flag-option?)]
         (assoc reader-map option-name option-reader)))
     {}
     option-specs))
@@ -59,9 +59,13 @@
 (defn make-options-builder [option-spec & option-specs]
   (args-parser (reader-map (cons option-spec option-specs) option-reader)))
 
-(defn- gen-option-reader [option-name default-value flag-option?])
+(defn- gen-option-reader [default-value flag-option?]
+  (if flag-option?
+   `(flag-reader ~default-value)
+   `(value-reader ~default-value)))
 
-(defn gen-reader-map [option-specs])
+(defn gen-reader-map [option-specs]
+  (reader-map option-specs gen-option-reader))
 
 (defmacro options-builder [option-spec & option-specs]
  `(args-parser ~(gen-reader-map (cons option-spec option-specs))))
