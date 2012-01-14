@@ -4,62 +4,69 @@
   fm.core.args
   (:use [clojure.contrib.str-utils :only (chop)]))
 
-(defn- option-type [option-spec]
-  (::option-type (meta option-spec)))
+(defn read-flag [option-name default-value args]
+  (let [[arg-name & args-tail] args]
+    (if (= option-name arg-name)
+      [true args-tail]
+      [default-value args])))
 
-(defn- flag-option? [option-spec]
-  (= ::flag (option-type option-spec)))
+(defn read-value [option-name default-value args]
+  (let [[arg-name arg-value & args-tail] args]
+    (if (= option-name arg-name)
+      [arg-value args-tail]
+      [default-value args])))
 
-(defn- value-option? [option-spec]
-  (= ::value (option-type option-spec)))
+(defn- flag-reader [option-name default-value]
+  (partial read-flag option-name default-value))
 
-(defn- validate-spec [option-spec]
-  (let [[option-name default-value] option-spec
-        option-name (name option-name)
-        flag-option? (.endsWith option-name "?")
-        option-name (keyword (if flag-option?
-                               (chop option-name)
-                               option-name))]
-    (with-meta
-      [option-name default-value]
-      {::option-type (if flag-option? ::flag ::value)})))
+(defn- value-reader [option-name default-value]
+  (partial read-value option-name default-value))
 
-(defn- validate-specs [option-specs]
-  (map complete-spec option-specs))
+(defn- option-reader [option-name default-value flag-option?]
+  ((if flag-option? flag-reader value-reader) option-name default-value))
 
-(defn- flag-reader [option-spec]
-  (let [[option-name default-value] option-spec]
-    (fn [args]
-      (let [[arg-name & args-tail] args]
-        (if (= option-name arg-name)
-          [true args-tail]
-          [default-value args])))))
+(defn- reader-map [option-specs]
+  (reduce
+    (fn [reader-map option-spec]
+      (let [[option-name default-value] option-spec
+            option-name (name option-name)
+            flag-option? (.endsWith option-name "?")
+            option-name (if flag-option? (chop option-name) option-name)
+            option-name (keyword option-name)
+            option-reader (option-reader option-name default-value flag-option?)]
+        (assoc reader-map option-name option-reader)))
+    {}
+    option-specs))
 
-(defn- value-reader [option-spec]
-  (let [[option-name default-value] option-spec]
-    (fn [args]
-      (let [[arg-name arg-value & args-tail] args]
-        (if (= option-name arg-name)
-          [arg-value args-tail]
-          [default-value args])))))
+(defn- throw-illegal-option-name [option-name]
+  (throw (IllegalArgumentException. (str "Illegal option name: '" option-name "'!"))))
 
-(defn- option-reader [option-spec])
+(defn- read-options [args reader-map options]
+  (if (seq args)
+    (let [[option-name] args
+          option-reader (reader-map option-name)]
+      (if option-reader
+        (let [[option-value args] (option-reader args)
+              reader-map (dissoc reader-map option-name)
+              options (assoc options option-name option-value)]
+          (recur args reader-map options))
+        (throw-illegal-option-name option-name)))
+    [args reader-map options]))
 
-(defn make-options-builder
-  ([option-specs]
-    (make-options-builder option-specs true))
-  ([option-specs validate?]
-    (let [option-specs (if validate?
-                         (validate-specs option-specs)
-                         option-specs)
-          specs-map (reduce
-                      (fn [specs-map spec]
-                        (let [[option-keyword default-value] spec]
-                          (assoc specs-map option-keyword spec)))
-                      {}
-                      option-specs)]
-      specs-map)))
+(defn- add-defaults [reader-map options]
+  (reduce
+    (fn [options [option-name reader]]
+      (let [[default-value _] (reader nil)]
+        (assoc options option-name default-value)))
+    options
+    reader-map))
 
-(defmacro options-builder [& option-specs]
-  (let [option-specs (validate-specs option-specs)]
-   `(make-options-builder (list ~@option-specs) false)))
+(defn args-parser [reader-map]
+  (fn [args]
+    (let [[args reader-map options] (read-options args reader-map {})]
+      (add-defaults reader-map options))))
+
+(defn make-options-builder [option-spec & option-specs]
+  (args-parser (reader-map (cons option-spec option-specs))))
+
+;; TODO: (defmacro options-builder [& option-specs])
