@@ -28,7 +28,7 @@
             option-reader (make-reader default-value flag-option?)]
         (assoc reader-map option-name option-reader)))
     {}
-    option-specs))
+    (partition 2 option-specs)))
 
 (defn- throw-illegal-option-name [option-name]
   (throw (IllegalArgumentException. (str "Illegal option name: '" option-name "'!"))))
@@ -56,8 +56,9 @@
 (defn args-parser [reader-map]
   #(apply add-defaults (rest (read-options % reader-map {}))))
 
-(defn make-options-builder [option-spec & option-specs]
-  (args-parser (reader-map (cons option-spec option-specs) option-reader)))
+(defn make-options-builder [option-name default-value & option-specs]
+  (let [option-specs (cons option-name (cons default-value option-specs))]
+    (args-parser (reader-map option-specs option-reader))))
 
 (defn- gen-option-reader [default-value flag-option?]
   (if flag-option?
@@ -67,5 +68,6 @@
 (defn gen-reader-map [option-specs]
   (reader-map option-specs gen-option-reader))
 
-(defmacro options-builder [option-spec & option-specs]
- `(args-parser ~(gen-reader-map (cons option-spec option-specs))))
+(defmacro options-builder [option-name default-value & option-specs]
+  (let [option-specs (cons option-name (cons default-value option-specs))]
+   `(args-parser ~(gen-reader-map option-specs))))
