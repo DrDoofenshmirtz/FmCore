@@ -17,7 +17,7 @@
 (defn- option-reader [option-name default-value flag-option?]
   ((if flag-option? flag-reader value-reader) option-name default-value))
 
-(defn- reader-map [option-specs]
+(defn- reader-map [option-specs make-option-reader]
   (reduce
     (fn [reader-map option-spec]
       (let [[option-name default-value] option-spec
@@ -25,7 +25,7 @@
             flag-option? (.endsWith option-name "?")
             option-name (if flag-option? (chop option-name) option-name)
             option-name (keyword option-name)
-            option-reader (option-reader option-name default-value flag-option?)]
+            option-reader (make-option-reader option-name default-value flag-option?)]
         (assoc reader-map option-name option-reader)))
     {}
     option-specs))
@@ -57,6 +57,11 @@
   #(apply add-defaults (rest (read-options % reader-map {}))))
 
 (defn make-options-builder [option-spec & option-specs]
-  (args-parser (reader-map (cons option-spec option-specs))))
+  (args-parser (reader-map (cons option-spec option-specs) option-reader)))
 
-;; TODO: (defmacro options-builder [& option-specs])
+(defn- gen-option-reader [option-name default-value flag-option?])
+
+(defn gen-reader-map [option-specs])
+
+(defmacro options-builder [option-spec & option-specs]
+ `(args-parser ~(gen-reader-map (cons option-spec option-specs))))
