@@ -53,21 +53,24 @@
     options
     reader-map))
 
-(defn args-parser [reader-map]
-  #(apply add-defaults (rest (read-options % reader-map {}))))
-
-(defn make-options-builder [option-name default-value & option-specs]
-  (let [option-specs (cons option-name (cons default-value option-specs))]
-    (args-parser (reader-map option-specs option-reader))))
+(defn make-options-builder
+  ([reader-map]
+    (assert (instance? clojure.lang.IPersistentMap reader-map))
+    (assert (instance? clojure.lang.IFn reader-map))
+    #(apply add-defaults (rest (read-options % reader-map {}))))
+  ([option-name default-value & option-specs]
+    (let [option-specs (cons option-name (cons default-value option-specs))]
+      (make-options-builder (reader-map option-specs option-reader)))))
 
 (defn- gen-option-reader [default-value flag-option?]
   (if flag-option?
    `(flag-reader ~default-value)
    `(value-reader ~default-value)))
 
-(defn gen-reader-map [option-specs]
+(defn- gen-reader-map [option-specs]
   (reader-map option-specs gen-option-reader))
 
 (defmacro options-builder [option-name default-value & option-specs]
-  (let [option-specs (cons option-name (cons default-value option-specs))]
-   `(args-parser ~(gen-reader-map option-specs))))
+  (let [option-specs (cons option-name (cons default-value option-specs))
+        reader-map (gen-reader-map option-specs)]
+   `(make-options-builder ~reader-map)))
