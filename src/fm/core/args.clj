@@ -2,7 +2,9 @@
   ^{:doc "Utilities for processing function arguments."
     :author "Frank Mosebach"}
   fm.core.args
-  (:use [clojure.contrib.str-utils :only (chop)]))
+  (:use
+    [clojure.contrib.except :only (throw-if)]
+    [clojure.contrib.str-utils :only (chop)]))
 
 (defn flag-reader [default-value]
   (fn
@@ -12,7 +14,15 @@
 (defn value-reader [default-value]
   (fn
     ([] default-value)
-    ([[_ value & args-tail]] [value args-tail])))
+    ([args]
+      (let [option-name-and-value (take 2 args)]
+        (throw-if
+          (< (count option-name-and-value) 2)
+          (IllegalStateException. (str
+                                    "Missing value for option '"
+                                    (first option-name-and-value)
+                                    "'!")))
+        [(second option-name-and-value) (drop 2 args)]))))
 
 (defn- option-reader [default-value flag-option?]
   ((if flag-option? flag-reader value-reader) default-value))
