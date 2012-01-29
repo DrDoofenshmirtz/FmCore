@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed2d3f3a-9540-4d2b-8397-f52a67582a95" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FmCore.iml" afterPath="$PROJECT_DIR$/FmCore.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FmCore.iws" afterPath="$PROJECT_DIR$/FmCore.iws" />
     </list>
     <ignored path="FmCore.iws" />
@@ -420,7 +419,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for &quot;options&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated IDE module settings." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -438,6 +437,7 @@
     <MESSAGE value="Check for matching option name when reading the next option value from the argument list." />
     <MESSAGE value="Renamed from &quot;args&quot; to &quot;options&quot;." />
     <MESSAGE value="Tests for &quot;options&quot;." />
+    <MESSAGE value="Updated IDE module settings." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
