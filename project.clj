@@ -1,6 +1,6 @@
 (def local-repo-path (-> (java.io.File. "/home/frank/clojure/mvn-repo") .toURI str))
 
-(defproject fm/core "1.0.0-SNAPSHOT"  
+(defproject fm/core "1.0.2"
   :description "FmCore: Basic Clojure Utilities."  
   :dependencies [[fm.clojure/clojure "1.2.0"]
                  [fm.clojure/clojure-contrib "1.2.0"]]  
