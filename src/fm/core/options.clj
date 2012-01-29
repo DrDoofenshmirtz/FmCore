@@ -1,7 +1,7 @@
 (ns
-  ^{:doc "Utilities for processing function arguments."
+  ^{:doc "Utilities for building option maps from argument lists."
     :author "Frank Mosebach"}
-  fm.core.args
+  fm.core.options
   (:use [clojure.contrib.str-utils :only (chop)]))
 
 (defn- throw-unexpected-option-name [expected actual]
