@@ -19,5 +19,31 @@
     (is (thrown? IllegalArgumentException (value-reader [])))
     (is (thrown? IllegalArgumentException (value-reader [::unexpected])))))
 
+(deftest options-builder
+  (let [options-builder (opts/options-builder
+                          flag? ::nothing
+                          value-1 ::value-1
+                          value-2 ::value-2)]
+    (is (=
+          {:flag ::nothing
+           :value-1 ::value-1
+           :value-2 ::value-2}
+          (options-builder [])))
+    (is (=
+          {:flag true
+           :value-1 ::value-1
+           :value-2 ::value-2}
+          (options-builder [:flag])))
+    (is (=
+          {:flag true
+           :value-1 1
+           :value-2 ::value-2}
+          (options-builder [:flag :value-1 1])))
+    (is (=
+          {:flag true
+           :value-1 1
+           :value-2 2}
+          (options-builder [:flag :value-1 1 :value-2 2])))))
+
 (defn run-tests []
   (clojure.test/run-tests 'fm.core.test-options))
