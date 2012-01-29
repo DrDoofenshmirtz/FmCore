@@ -13,7 +13,7 @@
     (is (thrown? IllegalArgumentException (flag-reader [::unexpected])))))
 
 (deftest value-reader
-  (let [value-reader (opts/optional-value-reader ::flag ::default-value)]
+  (let [value-reader (opts/value-reader ::flag ::default-value)]
     (is (= [::value [::next]] (value-reader [::flag ::value ::next])))
     (is (= ::default-value (value-reader)))
     (is (thrown? IllegalArgumentException (value-reader [])))
