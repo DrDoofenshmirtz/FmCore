@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed2d3f3a-9540-4d2b-8397-f52a67582a95" name="Default" comment="Check for matching option name when reading the next option value from the argument list.">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/fm/core/args.clj" afterPath="$PROJECT_DIR$/src/fm/core/options.clj" />
+    <list default="true" id="ed2d3f3a-9540-4d2b-8397-f52a67582a95" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/fm/core/test_options.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FmCore.iws" afterPath="$PROJECT_DIR$/FmCore.iws" />
     </list>
     <ignored path="FmCore.iws" />
@@ -62,10 +62,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="options.clj" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="options.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fm/core/options.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.4608295">
+            <state line="20" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_options.clj" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/fm/core/test_options.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="0" selection-start="852" selection-end="852" vertical-scroll-proportion="0.4608295">
               <folding />
             </state>
           </provider>
@@ -87,6 +96,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/fm/core/args.clj" />
         <option value="$PROJECT_DIR$/src/fm/core/options.clj" />
+        <option value="$PROJECT_DIR$/test/fm/core/test_options.clj" />
       </list>
     </option>
   </component>
@@ -410,7 +420,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Check for matching option name when reading the next option value from the argument list." />
+    <option name="LAST_COMMIT_MESSAGE" value="Renamed from &quot;args&quot; to &quot;options&quot;." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -426,6 +436,7 @@
     <MESSAGE value="Added .gitignore." />
     <MESSAGE value="File will be removed from version control!" />
     <MESSAGE value="Check for matching option name when reading the next option value from the argument list." />
+    <MESSAGE value="Renamed from &quot;args&quot; to &quot;options&quot;." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -460,7 +471,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fm/core/options.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.4608295">
+        <state line="20" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fm/core/test_options.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="852" selection-end="852" vertical-scroll-proportion="0.4608295">
           <folding />
         </state>
       </provider>
