@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed2d3f3a-9540-4d2b-8397-f52a67582a95" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fm/core/bytes.clj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fm/core/lazy-seqs.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FmCore.iws" afterPath="$PROJECT_DIR$/FmCore.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fm/core/lazy-seqs.clj" afterPath="$PROJECT_DIR$/src/fm/core/lazy-seqs.clj" />
     </list>
     <ignored path="FmCore.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,73 +66,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="seq.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fm/core/seq.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bytes.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fm/core/bytes.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="lazy-seqs.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fm/core/lazy-seqs.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1524" selection-end="1524" vertical-scroll-proportion="1.2162162">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="genclass.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Clojure/lib/clojure.jar!/clojure/genclass.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="core.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Clojure/lib/clojure.jar!/clojure/core.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parallel.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Clojure/lib/clojure.jar!/clojure/parallel.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="set.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Clojure/lib/clojure.jar!/clojure/set.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="76" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="string.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Clojure/lib/clojure.jar!/clojure/string.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="75" column="0" selection-start="2937" selection-end="2937" vertical-scroll-proportion="2.3388774">
               <folding />
             </state>
           </provider>
@@ -160,6 +96,7 @@
         <option value="$PROJECT_DIR$/project.clj" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/fm/core/bytes.clj" />
+        <option value="$PROJECT_DIR$/src/fm/core/seq.clj" />
         <option value="$PROJECT_DIR$/src/fm/core/lazy-seqs.clj" />
       </list>
     </option>
@@ -279,13 +216,24 @@
       <recent name="$PROJECT_DIR$/src/fm/core" />
     </key>
   </component>
-  <component name="RunManager" selected="Clojure Script.scratch">
+  <component name="RunManager" selected="Clojure Script.lazy-seqs">
     <configuration default="false" name="scratch" type="ClojureScriptRunConfiguration" factoryName="Clojure Script" temporary="true">
       <module name="FmCore" />
       <setting name="path" value="$PROJECT_DIR$/src/fm/scratch.clj" />
       <setting name="vmparams" value="" />
       <setting name="params" value="" />
       <setting name="workDir" value="$PROJECT_DIR$/src/fm" />
+      <setting name="repl" value="false" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="lazy-seqs" type="ClojureScriptRunConfiguration" factoryName="Clojure Script" temporary="true">
+      <module name="FmCore" />
+      <setting name="path" value="$PROJECT_DIR$/src/fm/core/lazy-seqs.clj" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="$PROJECT_DIR$/src/fm/core" />
       <setting name="repl" value="false" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
@@ -411,8 +359,9 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Clojure Script.scratch" />
+      <item index="1" class="java.lang.String" itemvalue="Clojure Script.lazy-seqs" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -506,7 +455,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved all unused or prototype sources to FmIncubator." />
+    <option name="LAST_COMMIT_MESSAGE" value="Byte fumbling &amp; fully lazy seqs." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -529,6 +478,7 @@
     <MESSAGE value="Updated project version to 1.0.2." />
     <MESSAGE value="More tests." />
     <MESSAGE value="Moved all unused or prototype sources to FmIncubator." />
+    <MESSAGE value="Byte fumbling &amp; fully lazy seqs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -592,11 +542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fm/core/seq.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fm/core/bytes.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0">
@@ -639,9 +584,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/fm/core/seq.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="58" selection-start="253" selection-end="253" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/fm/core/lazy-seqs.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1524" selection-end="1524" vertical-scroll-proportion="1.2162162">
+        <state line="75" column="0" selection-start="2937" selection-end="2937" vertical-scroll-proportion="2.3388774">
           <folding />
         </state>
       </provider>

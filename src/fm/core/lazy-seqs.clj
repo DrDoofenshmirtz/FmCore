@@ -37,3 +37,39 @@
   "Returns a vector of [(take-until pred coll) (drop-until pred coll)]."
   [pred coll]
   [(take-until pred coll) (drop-until pred coll)])
+
+(defn take-until-tailed-with
+  "Lazyly takes element by element from the head of the given collection until
+  the resulting collection ends with the given tail."
+  [tail coll]
+  (letfn [(scan [detect coll]
+            (lazy-seq (if (and (seq detect) (seq coll))
+                        (let [head (first coll)]
+                          (cons head (scan
+                                       (if (= head (first detect))
+                                         (rest detect)
+                                         tail)
+                                       (rest coll)))))))]
+    (scan tail coll)))
+
+(defn drop-until-tailed-with
+  "Drops element by element from the head of the given collection until the
+  dropped collection ends with the given tail. Returns the elements of the
+  given collection starting after the first occurrence of the tail."
+  [tail coll]
+  (letfn [(scan [detect coll]
+            (if (and (seq detect) (seq coll))
+              (let [head (first coll)]
+                (recur
+                  (if (= head (first detect))
+                    (rest detect)
+                    tail)
+                  (rest coll)))
+              coll))]
+    (lazy-seq (scan tail coll))))
+
+(defn split-after-tail
+  "Returns a vector of
+  [(take-until-tailed-with tail coll) (drop-until-tailed-with tail coll)]."
+  [tail coll]
+  [(take-until-tailed-with tail coll) (drop-until-tailed-with tail coll)])
