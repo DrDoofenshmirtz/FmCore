@@ -1,6 +1,6 @@
 (ns
-  #^{:doc "Miscellaneous functions and macros to create functions."
-     :author "Frank Mosebach"}
+  ^{:doc "Miscellaneous functions and macros to create functions."
+    :author "Frank Mosebach"}
   fm.core.func)
 
 (defn once
