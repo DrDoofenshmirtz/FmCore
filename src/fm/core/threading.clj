@@ -1,9 +1,9 @@
 (ns
-  #^{:doc "Threading utilities."
+  ^{:doc "Threading utilities."
     :author "Frank Mosebach"}
   fm.core.threading
-  (:use [clojure.contrib.def :only (defnk)])
-  (:use [fm.core.seq :only (split-with-tags)]))
+  (:use
+    [clojure.contrib.def :only (defnk)]))
 
 (defnk call-async
   "Runs the given job function in a new thread. Returns the created thread.
