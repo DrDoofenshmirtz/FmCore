@@ -32,3 +32,27 @@
   `(do
      (.lock ~lock)
      (try ~@body (finally (.unlock ~lock)))))
+
+(defn guarded-ref
+  "Creates a function f that acts as a 'guarded reference' to a value.
+  The created function accepts a 'mutator' function and any number of
+  additional arguments.
+  The mutator function will be called with the currently stored value
+  and any additional arguments. It is expected to return a collection
+  of [new-value return-value], where new-value is the new value to be
+  stored and return-value will be returned as result of the invocation.
+  Access to and mutation of the stored value is guarded guarded by a lock,
+  the monitor of which will be held during the invocation of the mutator.
+  If no lock is given, a java.lang.Object will be used.
+  If no value is given, a default value of nil will be used."
+  ([]
+    (guarded-ref nil))
+  ([value]
+    (guarded-ref (Object.) value))
+  ([lock value]
+    (let [ref (atom value)]
+      (fn [mutator & args]
+        (locking lock
+          (let [[value result] (apply mutator @ref args)]
+            (reset! ref value)
+            result))))))
