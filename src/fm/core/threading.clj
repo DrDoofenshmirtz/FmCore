@@ -56,3 +56,20 @@
           (let [[value result] (apply mutator @ref args)]
             (reset! ref value)
             result))))))
+
+(defn guarded-access
+  "Creates a function f that provides 'guarded access' to a mutable object.
+  The created function accepts an 'accessor' function and any number of
+  additional arguments.
+  The accessor function will be called with the mutable object and any
+  additional arguments. The accessor's return value will be returned as
+  result of the invocation.
+  Access to the mutable object is guarded guarded by a lock, the monitor
+  of which will be held during the invocation of the accessor.
+  If no lock is given, a java.lang.Object will be used."
+  ([mutable-object]
+    (guarded-access (Object.) mutable-object))
+  ([lock mutable-object]
+    (fn [accessor & args]
+      (locking lock
+        (apply accessor mutable-object args)))))
