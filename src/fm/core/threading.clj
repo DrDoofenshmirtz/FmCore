@@ -80,4 +80,4 @@
   Only applicable in case no additional arguments need to be passed to the
   guarding function!"
   [guarded & body]
- `(guarded (fn [~'%] ~@body)))
+ `(~guarded (fn [~'%] ~@body)))
