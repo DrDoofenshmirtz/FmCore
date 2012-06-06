@@ -73,3 +73,11 @@
     (fn [accessor & args]
       (locking lock
         (apply accessor mutable-object args)))))
+
+(defmacro with-guarded
+  "Evaluates the body expressions with the guarded object (a mutable object
+  or a reference) bound to '%'.
+  Only applicable in case no additional arguments need to be passed to the
+  guarding function!"
+  [guarded & body]
+ `(guarded (fn [~'%] ~@body)))
