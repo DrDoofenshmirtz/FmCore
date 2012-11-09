@@ -2,13 +2,15 @@
   ^{:doc "Fully lazy sequence functions for when it matters
          (e. g. when working with blocking input...)."
     :author "Frank Mosebach"}
-  fm.core.lazy-seqs)
+  fm.core.lazy-seqs
+  (:import
+    (java.io InputStream)))
 
 (defn unsigned-byte-seq
   "Creates a sequence of unsigned bytes, lazyly reading byte by byte from the
   given input stream until the end of the stream has been reached."
-  [input-stream]
-  (lazy-seq (let [unsigned-byte (.read input-stream)]
+  [^InputStream input-stream]
+  (lazy-seq (let [unsigned-byte (int (.read input-stream))]
               (if-not (neg? unsigned-byte)
                 (cons unsigned-byte (unsigned-byte-seq input-stream))))))
 

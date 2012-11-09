@@ -4,10 +4,10 @@
   fm.core.bytes)
 
 (defn signed-byte
-  "Converts the given number to a java byte value in the range [-127..127].
+  "Converts the given number to a java byte value in the range [-128..127].
   Unlike the clojure.core.byte function, it doesn't throw an exception if
   the given value is out of the aforementioned range."
-  [number]
+  [^Number number]
   (.byteValue number))
 
 (defn unsigned-byte
