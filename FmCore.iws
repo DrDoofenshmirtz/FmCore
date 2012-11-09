@@ -8,8 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ed2d3f3a-9540-4d2b-8397-f52a67582a95" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FmCore.iws" afterPath="$PROJECT_DIR$/FmCore.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fm/core/bytes.clj" afterPath="$PROJECT_DIR$/src/fm/core/bytes.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fm/core/lazy_seqs.clj" afterPath="$PROJECT_DIR$/src/fm/core/lazy_seqs.clj" />
     </list>
     <ignored path="FmCore.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,19 +65,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="lazy_seqs.clj" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="lazy_seqs.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fm/core/lazy_seqs.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="58" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
+            <state line="16" column="42" selection-start="597" selection-end="597" vertical-scroll-proportion="0.49586776">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bytes.clj" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="bytes.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fm/core/bytes.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.93801653">
+            <state line="46" column="0" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -109,8 +107,8 @@
         <option value="$PROJECT_DIR$/src/fm/core/lazy-seqs.clj" />
         <option value="$PROJECT_DIR$/src/fm/core/func.clj" />
         <option value="$PROJECT_DIR$/src/fm/core/threading.clj" />
-        <option value="$PROJECT_DIR$/src/fm/core/lazy_seqs.clj" />
         <option value="$PROJECT_DIR$/src/fm/core/bytes.clj" />
+        <option value="$PROJECT_DIR$/src/fm/core/lazy_seqs.clj" />
       </list>
     </option>
   </component>
@@ -429,6 +427,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22922637" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14439656" sideWeight="0.3243243" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -438,7 +437,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32857144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22922637" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -478,7 +476,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added missing unquote for parameter.&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed an unnecessary type hint.&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -509,6 +507,8 @@
     <MESSAGE value="guarded-access: Guarded access to mutable objects.&#10;" />
     <MESSAGE value="Macro for more convenient usage of guarded objects.&#10;" />
     <MESSAGE value="Added missing unquote for parameter.&#10;" />
+    <MESSAGE value="Added type hints.&#10;" />
+    <MESSAGE value="Removed an unnecessary type hint.&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -583,13 +583,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fm/core/lazy_seqs.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="58" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-6-sun/jre/lib/rt.jar!/java/lang/Byte.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="19" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0">
@@ -599,7 +592,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fm/core/bytes.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.93801653">
+        <state line="46" column="0" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fm/core/lazy_seqs.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="42" selection-start="597" selection-end="597" vertical-scroll-proportion="0.49586776">
           <folding />
         </state>
       </provider>
