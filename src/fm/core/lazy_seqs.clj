@@ -10,7 +10,7 @@
   "Creates a sequence of unsigned bytes, lazyly reading byte by byte from the
   given input stream until the end of the stream has been reached."
   [^InputStream input-stream]
-  (lazy-seq (let [unsigned-byte (int (.read input-stream))]
+  (lazy-seq (let [unsigned-byte (.read input-stream)]
               (if-not (neg? unsigned-byte)
                 (cons unsigned-byte (unsigned-byte-seq input-stream))))))
 
