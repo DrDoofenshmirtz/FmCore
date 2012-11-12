@@ -1,11 +1,10 @@
-(def local-repo-path (-> (java.io.File. "/home/frank/local-mvn-repo") .toURI str))
+;; Leiningen project file for the FmCore clojure project.
 
-(defproject fm/core "1.0.2"
+(defproject fm/core "1.0.4"
   :description "FmCore: Basic Clojure Utilities."  
-  :dependencies [[fm.clojure/clojure "1.2.0"]
-                 [fm.clojure/clojure-contrib "1.2.0"]]  
+  :dependencies [[org.clojure/clojure "1.2.1"]
+                 [org.clojure/clojure-contrib "1.2.0"]]  
   :disable-deps-clean true    
-  :repositories {"fm-local" ~local-repo-path}
   :jar-name "fm-core.jar"           
   :omit-source false
   :jar-exclusions [#"(?:^|/).svn/" 
