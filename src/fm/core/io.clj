@@ -45,3 +45,38 @@
                       (.close result)
                       (.toByteArray result)))
                   (recur expected (inc index) size)))))))
+
+(defn byte-array-seq
+  "Creates a lazy seq of byte arrays that have been read from the given
+  (non-nil) input stream.
+  Optional keyword arguments:
+    :available  The minimum number of bytes that is expected to be available
+                in the input stream.
+    :chunk-size The desired size of the byte arrays in the returned sequence.
+                The actual size will be the minimum of the given value and the
+                number of bytes (still) available in the input stream."
+  [^InputStream input-stream &
+   {:keys [available chunk-size] :or {chunk-size 1024}}]
+  (if (nil? input-stream)
+    (throw (IllegalArgumentException. "Illegal input stream: nil!")))
+  (let [chunk-size    (if available (min available chunk-size) chunk-size)
+        ^bytes buffer (byte-array chunk-size)]
+    (filter
+      (complement nil?)
+      ((fn read-chunks [available chunk-size]
+         (lazy-seq
+           (if (pos? chunk-size)
+             (let [number-read (.read input-stream buffer 0 chunk-size)]
+               (cond
+                 (neg? number-read)  nil
+                 (zero? number-read) (cons nil
+                                           (read-chunks available chunk-size))
+                 :else (if available
+                         (let [available  (- available number-read)
+                               chunk-size (min chunk-size available)]
+                           (cons (byte-array number-read buffer)
+                                 (read-chunks available chunk-size)))
+                         (cons (byte-array number-read buffer)
+                               (read-chunks available chunk-size))))))))
+       available
+       chunk-size))))
