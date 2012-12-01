@@ -46,12 +46,44 @@
                       (.toByteArray result)))
                   (recur expected (inc index) size)))))))
 
+(defn ^bytes read-byte-array
+  "Reads a byte array from the given (non-nil) input stream and returns it.
+  Returns nil if the end of the input stream has been reached before the
+  requested number of bytes could be read.
+
+  Optional keyword arguments (at least one must be specified!):
+
+  :buffer A byte array that will be used to store the read bytes.
+          If not specified, a byte array sized according to the given
+          :length option will be created.
+
+  :length An integer specifying the number of bytes to be read.
+          Defaults to the size of the given buffer if not specified."
+  [^InputStream input-stream & {:keys [buffer length]}]
+  (if-not (or buffer length)
+    (throw (IllegalArgumentException.
+      "At least one of the :buffer or :lenght options must be specified!")))
+  (if (nil? input-stream)
+    (throw (IllegalArgumentException. "Illegal input stream: nil!")))
+  (let [^bytes buffer (or buffer (byte-array length))
+        buffer-size   (alength buffer)
+        length        (int (if length (min buffer-size length) buffer-size))]
+    (loop [offset 0 length length]
+      (if (pos? length)
+        (let [number-read (.read input-stream buffer offset length)]
+          (if-not (neg? number-read)
+            (recur (+ offset number-read) (- length number-read))))
+        buffer))))
+
 (defn byte-array-seq
   "Creates a lazy seq of byte arrays that have been read from the given
   (non-nil) input stream.
+
   Optional keyword arguments:
+
     :available  The minimum number of bytes that is expected to be available
                 in the input stream.
+
     :chunk-size The desired size of the byte arrays in the returned sequence.
                 The actual size will be the minimum of the given value and the
                 number of bytes (still) available in the input stream."
