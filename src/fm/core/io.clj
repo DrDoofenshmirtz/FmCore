@@ -48,30 +48,19 @@
 
 (defn ^bytes read-byte-array
   "Reads a byte array from the given (non-nil) input stream and returns it.
-  Returns nil if the end of the input stream has been reached before the
-  requested number of bytes could be read.
-
-  Optional keyword arguments (at least one must be specified!):
-
-  :buffer A byte array that will be used to store the read bytes.
-          If not specified, a byte array sized according to the given
-          :length option will be created.
-
-  :length An integer specifying the number of bytes to be read.
-          Defaults to the size of the given buffer if not specified."
-  [^InputStream input-stream & {:keys [buffer length]}]
-  (if-not (or buffer length)
-    (throw (IllegalArgumentException.
-      "At least one of the :buffer or :lenght options must be specified!")))
+  The length of the returned byte array will be the minimum of given length
+  and the number of bytes (still) available in the input stream."
+  [^InputStream input-stream length]
   (if (nil? input-stream)
     (throw (IllegalArgumentException. "Illegal input stream: nil!")))
-  (let [^bytes buffer (or buffer (byte-array length))
-        buffer-size   (alength buffer)
-        length        (int (if length (min buffer-size length) buffer-size))]
+  (if-not (pos? length)
+    (throw (IllegalArgumentException. "Length must be greater than 0!")))
+  (let [^bytes buffer (byte-array length)]
     (loop [offset 0 length length]
       (if (pos? length)
         (let [number-read (.read input-stream buffer offset length)]
-          (if-not (neg? number-read)
+          (if (neg? number-read)
+            (byte-array offset buffer)
             (recur (+ offset number-read) (- length number-read))))
         buffer))))
 
