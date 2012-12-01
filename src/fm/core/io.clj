@@ -5,13 +5,13 @@
   (:import
     (java.io InputStream ByteArrayOutputStream)))
 
-(defn ^bytes read-until-detected
+(defn read-until-detected
   "Reads bytes from the given (non-nil) input stream until the given sequence
   of expected bytes has been read in the specified order or the end of the
   input stream has been reached.
   If successful, returns a byte array containing all bytes that have been read
   (including the sequence itself), otherwise nil."
-  [^InputStream input-stream expected]
+  ^bytes [^InputStream input-stream expected]
   (if (nil? input-stream)
     (throw (IllegalArgumentException. "Illegal input stream: nil!")))
   (if (seq expected)
@@ -46,11 +46,11 @@
                       (.toByteArray result)))
                   (recur expected (inc index) size)))))))
 
-(defn ^bytes read-byte-array
+(defn read-byte-array
   "Reads a byte array from the given (non-nil) input stream and returns it.
   The length of the returned byte array will be the minimum of given length
   and the number of bytes (still) available in the input stream."
-  [^InputStream input-stream length]
+  ^bytes [^InputStream input-stream length]
   (if (nil? input-stream)
     (throw (IllegalArgumentException. "Illegal input stream: nil!")))
   (if-not (pos? length)
@@ -76,28 +76,19 @@
     :chunk-size The desired size of the byte arrays in the returned sequence.
                 The actual size will be the minimum of the given value and the
                 number of bytes (still) available in the input stream."
-  [^InputStream input-stream &
-   {:keys [available chunk-size] :or {chunk-size 1024}}]
+  [input-stream & {:keys [available chunk-size] :or {chunk-size 1024}}]
   (if (nil? input-stream)
     (throw (IllegalArgumentException. "Illegal input stream: nil!")))
-  (let [chunk-size    (if available (min available chunk-size) chunk-size)
-        ^bytes buffer (byte-array chunk-size)]
-    (filter
-      (complement nil?)
-      ((fn read-chunks [available chunk-size]
-         (lazy-seq
-           (if (pos? chunk-size)
-             (let [number-read (.read input-stream buffer 0 chunk-size)]
-               (cond
-                 (neg? number-read)  nil
-                 (zero? number-read) (cons nil
-                                           (read-chunks available chunk-size))
-                 :else (if available
-                         (let [available  (- available number-read)
-                               chunk-size (min chunk-size available)]
-                           (cons (byte-array number-read buffer)
-                                 (read-chunks available chunk-size)))
-                         (cons (byte-array number-read buffer)
-                               (read-chunks available chunk-size))))))))
-       available
-       chunk-size))))
+  (letfn [(read-chunks [available]
+            (lazy-seq
+              (if (or (nil? available) (pos? available))
+                (let [chunk-size  (if available
+                                    (min available chunk-size)
+                                    chunk-size)
+                      bytes       (read-byte-array input-stream chunk-size)
+                      number-read (alength bytes)]
+                  (if (pos? number-read)
+                    (cons bytes
+                          (read-chunks (if available
+                                         (- available number-read)))))))))]
+    (read-chunks available)))
