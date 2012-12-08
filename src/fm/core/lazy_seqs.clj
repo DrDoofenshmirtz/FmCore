@@ -15,9 +15,10 @@
                 (cons unsigned-byte (unsigned-byte-seq input-stream))))))
 
 (defn take-until
-  "Lazyly takes element by element from the given collection until an element
-  satisfies the given predicate. The first element that fulfills the predicate
-  will be the last element of the resulting sequence."
+  "Lazyly takes elements from the given collection until an element satisfies
+  the given predicate or the collection runs out of items.
+  If an element fulfills the predicate it will become the last element of the
+  resulting sequence."
   [pred coll]
   (lazy-seq (if (seq coll)
               (let [next (first coll)]
