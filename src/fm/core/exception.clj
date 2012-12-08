@@ -95,3 +95,12 @@
       ([] nil)
       ([left right] (if (error? left) left right)))
     (map #(and % (do-silently (.close %))) closeables)))
+
+(defn exception-chain
+  "Creates a lazy seq of the exceptions, starting with the given exception
+  and walking back to the root cause."
+  [throwable]
+  (take-while identity
+              (iterate (fn [^Throwable throwable]
+                         (.getCause throwable))
+                       throwable)))
