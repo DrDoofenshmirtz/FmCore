@@ -104,3 +104,12 @@
               (iterate (fn [^Throwable throwable]
                          (.getCause throwable))
                        throwable)))
+
+(defn caused-by
+  "Returns an exception of the given class (or a subclass) if it can be found
+  in the 'cause chain' of the given exception, otherwise nil."
+  [exception exception-class]
+  (some (fn [exception]
+          (if (instance? exception-class exception)
+            exception))
+        (exception-chain exception)))
