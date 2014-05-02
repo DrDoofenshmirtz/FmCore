@@ -1,6 +1,6 @@
 ;; Leiningen project file for the FmCore clojure project.
 
-(defproject fm/core "1.0.4"
+(defproject fm/fm-core "1.0.0-SNAPSHOT"
   :description "FmCore: Basic Clojure Utilities."  
   :dependencies [[org.clojure/clojure "1.2.1"]
                  [org.clojure/clojure-contrib "1.2.0"]]  
