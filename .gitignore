@@ -9,3 +9,6 @@
 *.ipr
 *.iws
 .lein-deps-sum
+.lein-repl-history
+pom.xml
+
